@@ -1,0 +1,76 @@
+CREATE DATABASE db_assignment_4;
+USE db_assignment_4;
+
+CREATE TABLE `user` (
+  id INT(20) NOT NULL AUTO_INCREMENT,
+  name VARCHAR(255) NULL,
+  email VARCHAR (255) NOT NULL,
+  password VARCHAR (255) NOT NULL,
+  is_admin INT(1) NOT NULL,
+
+  PRIMARY KEY (id)
+);
+INSERT INTO `user` (id, name, email, password, is_admin) VALUES
+  (1, 'Administrator', 'admin@gmail.com', 'admin', 1);
+
+
+CREATE TABLE `room` (
+  room_no INT(20) NOT NULL AUTO_INCREMENT,
+  floor_no INT(20) NOT NULL,
+  price INT(20) NOT NULL,
+
+  PRIMARY KEY (room_no)
+);
+INSERT INTO `room` (room_no, floor_no, price) VALUES
+  (1, 1, 150),
+  (2, 1, 150),
+  (3, 2, 200),
+  (4, 2, 200),
+  (5, 2, 200);
+
+CREATE TABLE `client_detail` (
+  client_id INT(20) NOT NULL AUTO_INCREMENT,
+  client_name VARCHAR(255) NULL,
+  email VARCHAR(255) NULL,
+  mobile VARCHAR(255) NULL,
+  address VARCHAR(255) NULL,
+
+  PRIMARY KEY (client_id)
+);
+
+INSERT INTO `client_detail` (client_id, client_name, email, mobile, address) VALUES
+  (1, 'client_A', 'a@gmail.com', '9008007001', 'india'),
+  (2, 'client_B', 'b@gmail.com', '9008007002', 'russia');
+
+CREATE TABLE `booking_master` (
+  booking_no INT(20) NOT NULL AUTO_INCREMENT,
+  client_id INT(20) NOT NULL,
+  booking_status VARCHAR(50) NULL,
+  booked_on TIMESTAMP NOT NULL,
+
+  PRIMARY KEY (booking_no)
+);
+
+INSERT INTO `booking_master` (booking_no, client_id, booking_status, booked_on) VALUES
+	(1, 2, 'CLOSED', '2019-08-07 11:10:10'),
+	(2, 1, 'CACELLED', '2019-08-07 12:10:10'),
+	(3, 1, 'BOOKED', '2019-08-07 14:10:10');
+
+CREATE TABLE `booking_room_detail` (
+  id INT(20) NOT NULL AUTO_INCREMENT,
+  booking_no INT(20) NOT NULL,
+  room_no INT(20) NOT NULL,
+  start_date DATE NOT NULL,
+  end_date DATE NOT NULL,
+
+  PRIMARY KEY (id)
+);
+
+INSERT INTO `booking_room_detail` (booking_no, room_no, start_date, end_date) VALUES 
+  (1, 1, '2019-06-15', '2019-06-17'),
+  (1, 2, '2019-06-15', '2019-06-17'),
+  (2, 3, '2019-07-15', '2019-07-17'),
+  (2, 4, '2019-07-15', '2019-07-17'),
+  (3, 1, '2019-08-15', '2019-08-17'),
+  (3, 5, '2019-08-15', '2019-08-17');
+  
